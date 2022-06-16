@@ -9,6 +9,7 @@
  *     ListNode(int x, ListNode *next) : val(x), next(next) {}
  * };
  */
+//1.自己写的迭代算法
 class Solution {
 public:
     ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) 
@@ -41,5 +42,25 @@ public:
         //说明list1处理结束，将l1剩余元素跟在后面即可
         else        tail->next=list2;
         return res;
+    }
+};
+
+//2.递归算法
+class Solution {
+public:
+    ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) 
+    {
+        if(l1==NULL)    return l2;
+        else if(l2==NULL)    return l1;
+        else if(l1->val<l2->val)
+        {
+            l1->next=mergeTwoLists(l1->next,l2);
+            return l1;
+        }
+        else
+        {
+            l2->next=mergeTwoLists(l1,l2->next);
+            return l2;
+        }
     }
 };
